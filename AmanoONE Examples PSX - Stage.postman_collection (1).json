@@ -1,0 +1,708 @@
+{
+	"info": {
+		"_postman_id": "0fac875f-9dc8-41fa-b5d7-b278e8503974",
+		"name": "AmanoONE Examples PSX - Stage",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13720465"
+	},
+	"item": [
+		{
+			"name": "GET Authentication Stage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const headerJson = pm.response.json();\r",
+							"pm.collectionVariables.set(\"stageBearerToken\", headerJson.access_token)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"ClientSecret\": \"$2a$06$cXyZ7BHfchzxR7Ujw.zklez3ozCqj7TbKW5v0MkX7DOYt2l7Mg71G\",\r\n\"ClientID\": \"8ed5bb86-08db-47f7-8252-5b9abc55cfe8\"\r\n}"
+				},
+				"url": {
+					"raw": "https://stage-internal-api.ensemble-cloud.net/authenticate/token/thirdparty",
+					"protocol": "https",
+					"host": [
+						"stage-internal-api",
+						"ensemble-cloud",
+						"net"
+					],
+					"path": [
+						"authenticate",
+						"token",
+						"thirdparty"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Validation",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "facility",
+						"value": "84dcec3d-fe51-4b30-90e5-17e4274959b2",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"validationID\": \"API0123456789\",\r\n  \"validationAccountName\": \"Minnesota Twins\",\r\n  \"validationOffer\": \"Testing\",\r\n  \"activationDate\": \"2022-08-19T16:20:48.138Z\",\r\n  \"expirationDate\": \"2022-09-19T16:20:48.138Z\",\r\n  \"credential\": \"Bar01234556789\",\r\n  \"value\": 1,\r\n  \"usesAvailable\": 1,\r\n  \"contact\": {\r\n    \"contactID\": \"77263310-f99e-4626-98bf-44dba03d0878\",\r\n    \"firstName\": \"API\",\r\n    \"lastName\": \"Test\",\r\n    \"email\": \"michael.schwender@amanomcgann.com\",\r\n    \"phone\": \"651-333-0079\",\r\n    \"licensePlate\": \"NA\"\r\n  },\r\n  \"usedDate\": \"2022-08-19T16:20:48.138Z\"\r\n}"
+				},
+				"url": {
+					"raw": "https://stage-api.ensemble-cloud.net/validation",
+					"protocol": "https",
+					"host": [
+						"stage-api",
+						"ensemble-cloud",
+						"net"
+					],
+					"path": [
+						"validation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Facilities Stage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{stageBearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Conent-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://stage-api.ensemble-cloud.net/facilities",
+					"protocol": "https",
+					"host": [
+						"stage-api",
+						"ensemble-cloud",
+						"net"
+					],
+					"path": [
+						"facilities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Pass",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "facility",
+						"value": "54f0fe21-9cba-4ca4-bfa0-906e38431c8a",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"passID\": \"APITest00015\",\r\n    \"activationDate\": \"2023-01-11T00:00:00.195\",\r\n    \"expirationDate\": \"2023-12-31T00:00:00.195\",\r\n    \"credential\": \"barcode00015\",\r\n    \"value\": 0.0,\r\n    \"usesAvailable\": 1,\r\n    \"contact\": {\r\n        \"contactID\": \"00000000-0000-0000-0000-000000000000\",\r\n        \"firstName\": \"API\",\r\n        \"lastName\": \"Test\",\r\n        \"email\": \"Apitest@gmail.com\",\r\n        \"phone\": \"612-331-2020\",\r\n        \"licensePlate\": \"ABC123\"\r\n    },\r\n    \"status\": 3,\r\n    \"passThru\": null\r\n}"
+				},
+				"url": {
+					"raw": "https://stage-api.ensemble-cloud.net/pass",
+					"protocol": "https",
+					"host": [
+						"stage-api",
+						"ensemble-cloud",
+						"net"
+					],
+					"path": [
+						"pass"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Access Groups",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{stageBearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Conent-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "facility",
+						"value": "{{Facility}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://stage-api.ensemble-cloud.net/accessgroups",
+					"protocol": "https",
+					"host": [
+						"stage-api",
+						"ensemble-cloud",
+						"net"
+					],
+					"path": [
+						"accessgroups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Transactions",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "facility",
+						"value": "84dcec3d-fe51-4b30-90e5-17e4274959b2",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://stage-api.ensemble-cloud.net/transactions/84dcec3d-fe51-4b30-90e5-17e4274959b2?start=2022-10-15&end=2022-10-25",
+					"protocol": "https",
+					"host": [
+						"stage-api",
+						"ensemble-cloud",
+						"net"
+					],
+					"path": [
+						"transactions",
+						"84dcec3d-fe51-4b30-90e5-17e4274959b2"
+					],
+					"query": [
+						{
+							"key": "start",
+							"value": "2022-10-15"
+						},
+						{
+							"key": "end",
+							"value": "2022-10-25"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Access Holder",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{stageBearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "facility",
+						"value": "{{Facility}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"accountNumber\": \"API-001\",\r\n  \"active\": true,\r\n  \"startDate\": \"2023-03-26T18:30:20.068Z\",\r\n  \"endDate\": \"2023-12-31T18:30:20.068Z\",\r\n  \"status\": 1,\r\n  \"mode\": 1,\r\n  \"contactInfo\": {\r\n    \"isPrimary\": true,\r\n    \"licensePlate\": \"TEST123\",\r\n    \"firstName\": \"BuildingHub\",\r\n    \"lastName\": \"API Test\",\r\n    \"entityID\": \"84dcec3d-fe51-4b30-90e5-17e4274959b2\",\r\n    \"emails\": [\r\n      {\r\n        \"emailAddress\": \"test@amano.com\"\r\n      }\r\n    ],\r\n    \"phoneNumbers\": [\r\n      {\r\n        \"number\": \"612-331-2020\"\r\n      }\r\n    ],\r\n    \"addresses\": [\r\n      {\r\n        \"addressLine1\": \"2699 Patton Rd\",\r\n        \"addressLine2\": \"\",\r\n        \"state\": \"MN\",\r\n        \"postalCode\": \"55113\",\r\n        \"city\": \"Roseville\"\r\n      }\r\n    ]\r\n  },\r\n  \"accessGroups\": [\r\n    {\r\n      \"accessGroupID\": \"85cab655-9adb-4181-bb8d-0f151dcdcd39\"\r\n    }\r\n  ],\r\n  \"credentials\": [\r\n    {\r\n      \"credentialReference\": \"5814\",\r\n      \"credentialType\": 6,\r\n      \"systemCode\": \"\"\r\n    }\r\n  ],\r\n  \"vehicles\": [\r\n    {\r\n      \"make\": \"Jeep\",\r\n      \"model\": \"Wrangler\",\r\n      \"licenseNumber\": \"MN1991\",\r\n      \"vehicleYear\": \"1991\",\r\n      \"color\": \"White\"\r\n    }\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "https://stage-api.ensemble-cloud.net/accessHolder",
+					"protocol": "https",
+					"host": [
+						"stage-api",
+						"ensemble-cloud",
+						"net"
+					],
+					"path": [
+						"accessHolder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT AccessHolder",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{stageBearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "facility",
+						"value": "{{Facility}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accountNumber\": \"API-001\",\r\n    \"subscriberID\": \"e7ef7a3e-f45a-4e4d-b0b3-efd1baeedb2e\",\r\n    \"active\": true,\r\n    \"accessHolderID\": \"bccba478-3eda-416e-9c2e-3cc78e7da41d\",\r\n    \"contractID\": \"c3e43fdd-86cd-4510-83f3-d46dbd1fb43d\",\r\n    \"entityID\": \"178ed908-6ce6-4f1d-872b-566db6880f07\",\r\n    \"startDate\": \"2023-03-26T18:30:20.068\",\r\n    \"endDate\": \"2023-12-31T18:30:20.068\",\r\n    \"status\": 1,\r\n    \"mode\": 1,\r\n    \"contractType\": \"Monthly\",\r\n    \"contactInfo\": {\r\n        \"contactID\": \"8db8b5a6-2f7b-4046-bac9-41fe8edfea26\",\r\n        \"isPrimary\": true,\r\n        \"licensePlate\": null,\r\n        \"firstName\": \"BuildingHub\",\r\n        \"lastName\": \"API Test Update\",\r\n        \"entityID\": \"178ed908-6ce6-4f1d-872b-566db6880f07\",\r\n        \"emails\": [\r\n            {\r\n                \"emailAddress\": \"test@amano.com\"\r\n            }\r\n        ],\r\n        \"phoneNumbers\": [\r\n            {\r\n                \"number\": \"612-331-2020\"\r\n            }\r\n        ],\r\n        \"addresses\": [\r\n            {\r\n                \"addressLine1\": \"2699 Patton Rd\",\r\n                \"addressLine2\": \"\",\r\n                \"state\": \"MN\",\r\n                \"postalCode\": \"55113\",\r\n                \"city\": \"Roseville\"\r\n            }\r\n        ]\r\n    },\r\n    \"accessGroups\": [\r\n        {\r\n            \"accessGroupID\": \"85cab655-9adb-4181-bb8d-0f151dcdcd39\"\r\n        }\r\n    ],\r\n    \"credentials\": [\r\n        {\r\n            \"credentialID\": \"ab1ec7e4-7f72-41fa-80d3-b1660dcad3d9\",\r\n            \"credentialReference\": \"1234\",\r\n            \"credentialType\": 6,\r\n            \"systemCode\": \"\"\r\n        }\r\n    ],\r\n    \"vehicles\": [\r\n        {\r\n            \"vehicleID\": \"e6af6423-b3ff-4071-a80b-be023de4f9c7\",\r\n            \"make\": \"Jeep\",\r\n            \"model\": \"Wrangler\",\r\n            \"licenseNumber\": \"MN1991\",\r\n            \"vehicleYear\": \"1991\",\r\n            \"color\": \"White\"\r\n        }\r\n    ],\r\n    \"contract\": {\r\n        \"contractID\": \"c3e43fdd-86cd-4510-83f3-d46dbd1fb43d\",\r\n        \"name\": \"API-001\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "https://stage-api.ensemble-cloud.net/accessHolder",
+					"protocol": "https",
+					"host": [
+						"stage-api",
+						"ensemble-cloud",
+						"net"
+					],
+					"path": [
+						"accessHolder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Accessholder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{stageBearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Conent-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "facility",
+						"value": "{{Facility}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://stage-api.ensemble-cloud.net/accessHolder/aefdb1ea-c14b-40a5-bc6b-fc90a98f4376",
+					"protocol": "https",
+					"host": [
+						"stage-api",
+						"ensemble-cloud",
+						"net"
+					],
+					"path": [
+						"accessHolder",
+						"aefdb1ea-c14b-40a5-bc6b-fc90a98f4376"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Accessholder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{stageBearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Conent-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "facility",
+						"value": "{{Facility}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://stage-api.ensemble-cloud.net/accessHolder/API-001",
+					"protocol": "https",
+					"host": [
+						"stage-api",
+						"ensemble-cloud",
+						"net"
+					],
+					"path": [
+						"accessHolder",
+						"API-001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Pass Stage",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{stageBearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "facility",
+						"value": "54f0fe21-9cba-4ca4-bfa0-906e38431c8a",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"passID\": \"BDH00001\",\r\n    \"activationDate\": \"2023-04-05T19:11:58.195\",\r\n    \"expirationDate\": \"2023-12-31T19:11:58.195\",\r\n    \"credential\": \"BDH00001\",\r\n    \"value\": 0.0,\r\n    \"usesAvailable\": 1,\r\n    \"contact\": {\r\n        \"firstName\": \"BuildingHub\",\r\n        \"lastName\": \"Test\",\r\n        \"email\": \"test@parkchirp.com\",\r\n        \"phone\": \"612-331-2020\",\r\n        \"licensePlate\": \"ABC123\"\r\n    },\r\n    \"status\": 2,\r\n    \"passThru\": \"Testing\"\r\n}"
+				},
+				"url": {
+					"raw": "https://stage-api.ensemble-cloud.net/pass",
+					"protocol": "https",
+					"host": [
+						"stage-api",
+						"ensemble-cloud",
+						"net"
+					],
+					"path": [
+						"pass"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Pass Stage",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{stageBearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "facility",
+						"value": "54f0fe21-9cba-4ca4-bfa0-906e38431c8a",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://stage-api.ensemble-cloud.net/pass/stageAPI00011",
+					"protocol": "https",
+					"host": [
+						"stage-api",
+						"ensemble-cloud",
+						"net"
+					],
+					"path": [
+						"pass",
+						"stageAPI00011"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Count",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{stageBearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "facility",
+						"value": "{{Facility}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://stage-api.ensemble-cloud.net/counts/differential",
+					"protocol": "https",
+					"host": [
+						"stage-api",
+						"ensemble-cloud",
+						"net"
+					],
+					"path": [
+						"counts",
+						"differential"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "stageBearerToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "Facility",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
