@@ -7,7 +7,7 @@ import base64
 
 def send_qr_code_email(email, qr_code_number):
     # Define your email configuration
-    from_email = 'your_email@example.com'  # Your email address
+    from_email = mike.mitchell@psxgroup.com
     to_email = email
     subject = 'Your QR Code for Validation'
     
@@ -30,7 +30,8 @@ def send_qr_code_email(email, qr_code_number):
     msg.attach(MIMEText(html_content, 'html'))
 
     # Send email
-    with smtplib.SMTP('smtp.example.com', 587) as server:  # Replace 'smtp.example.com' and 587 with your SMTP server and port
+    with smtplib.SMTP(smtp.gmail.com, 587) as server:  # Replace 'smtp.example.com' and 587 with your SMTP server and port
         server.starttls()
-        server.login(from_email, 'your_email_password')  # Replace 'your_email_password' with your actual email password
+        server.login(from_email, EMAIL_PASSWORD=dvvukbnjcjxpdpic)  # Replace 'your_email_password' with your actual email password
         server.sendmail(from_email, to_email, msg.as_string())
+
